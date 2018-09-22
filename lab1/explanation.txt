@@ -1,1 +1,8 @@
 i would like to tell you something about the late submission and help me to fix it.
+This next command is useful if you would like to actually undo your work. 
+Let’s say that you have modified a certain file since committing previously, 
+but you would like your file back to how it was before your modifications.
+Note: This command is potentially quite dangerous because any changes you made to the 
+file since your last commit will be removed. Use this with caution!
+Last March, a computer built by a team of Google engineers beat one of the world's top players at the ancient game of Go. 
+The match between.
