@@ -16,7 +16,6 @@ public class InDemo {
 
 		/* Start reading in national_salt_production.txt */
 		In in = new In("national_salt_production.txt");
-		
 		/* Keep looking until the file is empty. */
 		while(!in.isEmpty()) {
 			/* Each line has the rank of a country, then its
