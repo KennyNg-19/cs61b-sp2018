@@ -41,14 +41,14 @@ public class Planet {
 
     /** Compute force in different directions */
     public double calcForceExertedByX(Planet p) {
-        double distance = this.calDistance(p);
+        double distance = this.calcDistance(p);
         double force = calcForceExertedBy(p);
         double forceX = (p.xxPos - this.xxPos) / distance * force;
         return forceX;
     }
 
     public double calcForceExertedByY(Planet p) {
-        double distance = this.calDistance(p);
+        double distance = this.calcDistance(p);
         double force = calcForceExertedBy(p);
         double forceY = (p.yyPos - this.yyPos) / distance * force;
         return forceY;
