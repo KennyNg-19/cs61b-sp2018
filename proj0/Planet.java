@@ -27,13 +27,13 @@ public class Planet {
     }
 
     /**define method to calculate distance between planets */
-    public double calDistance(Planet rocinante) {
+    public double calcDistance(Planet rocinante) {
         return Math.sqrt(Math.pow(this.xxPos - rocinante.xxPos, 2) + Math.pow(this.yyPos - rocinante.yyPos, 2));
     }
 
     /**Calculate force between planets */
     public double calcForceExertedBy(Planet p) {
-        double distance = this.calDistance(p);
+        double distance = this.calcDistance(p);
         double G = 6.67e-11;
         double force = G * this.mass * p.mass / Math.pow(distance, 2);
         return force;
