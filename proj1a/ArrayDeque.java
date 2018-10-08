@@ -5,7 +5,7 @@
 */
 
 
-public class ArrayDeque <T> {
+public class ArrayDeque<T> {
     private int size;
     private T[] item;
     private int nextFirst;
@@ -24,7 +24,8 @@ public class ArrayDeque <T> {
         int headLength =  plusOne(nextLast);
         int tailLength = item.length - nextFirst;
         System.arraycopy(item, 0, newArray, 0, headLength);
-        System.arraycopy(item, nextFirst, newArray, headLength + newArray.length - size, tailLength);
+        System.arraycopy(item, nextFirst, newArray, headLength + newArray.length - size,
+                tailLength);
         return tailLength;
     }
 
@@ -52,8 +53,7 @@ public class ArrayDeque <T> {
             System.arraycopy(item, 0, a, 0, size);
             item = a;
             nextFirst = item.length - 1;
-        }
-        else {
+        } else {
             int tailLength = rebuild(a);
             nextFirst = minusOne(newSize) - tailLength;
             item = a;
@@ -73,7 +73,7 @@ public class ArrayDeque <T> {
         size = plusOne(size);
         if (size == item.length) {
             resizeFirst(size * FRACTOR);
-            }
+        }
         if (minusOne(nextFirst) < 0) {
             nextFirst = minusOne(item.length);
         } else {
