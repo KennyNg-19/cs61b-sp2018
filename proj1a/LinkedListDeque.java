@@ -5,18 +5,18 @@ Description: This project is the implementation of DLList
 */
 
 
-public class LinkedListDeque <Item> {
+public class LinkedListDeque <T> {
     private IntNode sentinel;
     private int size;
 
     /* define IntNode class*/
     private class IntNode {
-        public IntNode prev;
-        public IntNode next;
-        public Item item;
+        private IntNode prev;
+        private IntNode next;
+        private T item;
 
         /* define value constructor of */
-        public IntNode(Item x, IntNode p, IntNode n) {
+        private IntNode(T x, IntNode p, IntNode n) {
             item = x;
             prev = p;
             next = n;
@@ -34,14 +34,14 @@ public class LinkedListDeque <Item> {
 
     /* define addfirst method. When adding the first node,
      * Consider the sentinel.next.next is sentinel*/
-    public void addFirst(Item x) {
+    public void addFirst(T x) {
         sentinel.next = new IntNode(x, sentinel, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
 
     /* add node at the end of list*/
-    public void addLast(Item x) {
+    public void addLast(T x) {
         sentinel.prev.next = new IntNode(x, sentinel.prev.next, sentinel);
         sentinel.prev = sentinel.prev.next;
         size += 1;
@@ -71,11 +71,11 @@ public class LinkedListDeque <Item> {
     }
 
     /* remove the front element of list */
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
-        Item removedNode = sentinel.next.item;
+        T removedNode = sentinel.next.item;
         sentinel.next.next.prev = sentinel;
         sentinel.next = sentinel.next.next;
         size -= 1;
@@ -84,11 +84,11 @@ public class LinkedListDeque <Item> {
 
 
     /* remove the last element in the list */
-    public Item removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
-        Item removedNode = sentinel.prev.item;
+        T removedNode = sentinel.prev.item;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
         size -= 1;
@@ -96,7 +96,7 @@ public class LinkedListDeque <Item> {
     }
 
     /* get the item at the given index */
-    public Item get(int index) {
+    public T get(int index) {
         if (index > size - 1) {
             return null;
         }
@@ -108,7 +108,7 @@ public class LinkedListDeque <Item> {
     }
 
     /* helper function for getRecursive method */
-    private Item helper(IntNode node, int size) {
+    private T helper(IntNode node, int size) {
         if (size == 0) {
             return node.item;
         } else {
@@ -116,7 +116,7 @@ public class LinkedListDeque <Item> {
         }
     }
 
-    public Item getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index > size - 1) {
             return null;
         }

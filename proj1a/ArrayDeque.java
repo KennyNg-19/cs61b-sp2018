@@ -5,12 +5,12 @@
 */
 
 
-public class ArrayDeque <Item> {
+public class ArrayDeque <T> {
     private int size;
-    private Item[] item;
+    private T[] item;
     private int nextFirst;
     private int nextLast;
-    private int FRACTOR = 4;
+    private int FRACTOR = 2;
 
     private int minusOne(int index) {
         return index - 1;
@@ -20,7 +20,7 @@ public class ArrayDeque <Item> {
         return index + 1;
     }
 
-    private int rebuild(Item [] newArray) {
+    private int rebuild(T [] newArray) {
         int headLength =  plusOne(nextLast);
         int tailLength = item.length - nextFirst;
         System.arraycopy(item, 0, newArray, 0, headLength);
@@ -29,7 +29,7 @@ public class ArrayDeque <Item> {
     }
 
     private void resizeFirst(int newSize) {
-        Item [] a = (Item[]) new Object[newSize];
+        T [] a = (T[]) new Object[newSize];
         nextLast = minusOne(nextLast);
         if (nextLast < 0) {
             System.arraycopy(item, 0, a, 0, size);
@@ -46,7 +46,7 @@ public class ArrayDeque <Item> {
     }
 
     private void resizeLast(int newSize) {
-        Item [] a = (Item[]) new Object[newSize];
+        T [] a = (T[]) new Object[newSize];
         nextFirst = plusOne(nextFirst);
         if (nextFirst == 8) {
             System.arraycopy(item, 0, a, 0, size);
@@ -63,12 +63,12 @@ public class ArrayDeque <Item> {
 
     public ArrayDeque() {
         size = 0;
-        item = (Item[]) new Object[8];
+        item = (T[]) new Object[8];
         nextFirst = 4;
         nextLast = 5;
     }
 
-    public void addFirst(Item x) {
+    public void addFirst(T x) {
         item[nextFirst] = x;
         size = plusOne(size);
         if (size == item.length) {
@@ -82,7 +82,7 @@ public class ArrayDeque <Item> {
 
     }
 
-    public void addLast(Item x) {
+    public void addLast(T x) {
         item[nextLast] = x;
         size = plusOne(size);
         if (size == item.length) {
@@ -114,7 +114,7 @@ public class ArrayDeque <Item> {
         }
     }
 
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -122,13 +122,13 @@ public class ArrayDeque <Item> {
         if (nextFirst == item.length) {
             nextFirst = 0;
         }
-        Item val = item[nextFirst];
+        T val = item[nextFirst];
         item[nextFirst] = null;
         size = minusOne(size);
         return val;
     }
 
-    public Item removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -136,13 +136,13 @@ public class ArrayDeque <Item> {
         if (nextLast < 0) {
             nextLast = minusOne(item.length);
         }
-        Item val = item[nextLast];
+        T val = item[nextLast];
         item[nextLast] = null;
         size = minusOne(size);
         return val;
     }
 
-    public Item get(int index) {
+    public T get(int index) {
         if (index > minusOne(size)) {
             return null;
         }
