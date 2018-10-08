@@ -153,7 +153,11 @@ public class ArrayDeque <Item> {
         return item[target];
     }
 
-//    public static void main(String[] args) {
+    public int size() {
+        return size;
+    }
+
+    //    public static void main(String[] args) {
 //        ArrayDeque <Integer> a = new ArrayDeque <Integer> ();
 //        System.out.println(a.isEmpty());
 //        a.addFirst(1);
