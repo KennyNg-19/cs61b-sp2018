@@ -75,14 +75,15 @@ public class LinkedListDeque<T> {
     public T removeFirst() {
         if (size == 0) {
             return null;
+        } else {
+            T removedNode = sentinel.next.item;
+            sentinel.next.next.prev = sentinel;
+            sentinel.next = sentinel.next.next;
+            size -= 1;
+            return removedNode;
         }
-        T removedNode = sentinel.next.item;
-        sentinel.next.next.prev = sentinel;
-        sentinel.next = sentinel.next.next;
-        size -= 1;
-        return removedNode;
     }
-
+    
 
     /* remove the last element in the list */
     public T removeLast() {
@@ -109,11 +110,11 @@ public class LinkedListDeque<T> {
     }
 
     /* helper function for getRecursive method */
-    private T helper(IntNode node, int size) {
-        if (size == 0) {
+    private T helper(IntNode node, int index) {
+        if (index == 0) {
             return node.item;
         } else {
-            return helper(node.next, size - 1);
+            return helper(node.next, index - 1);
         }
     }
 
@@ -121,7 +122,7 @@ public class LinkedListDeque<T> {
         if (index > size - 1) {
             return null;
         }
-        return  helper(sentinel.next, size);
+        return  helper(sentinel.next, index);
     }
 
 }
