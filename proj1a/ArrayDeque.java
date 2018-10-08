@@ -153,29 +153,30 @@ public class ArrayDeque <Item> {
         return item[target];
     }
 
-    public static void main(String[] args) {
-        ArrayDeque <Integer> a = new ArrayDeque <Integer> ();
-        System.out.println(a.isEmpty());
-        a.addFirst(1);
-        a.addFirst(2);
-        a.addFirst(3);
-        a.addLast(4);
-        a.addLast(5);
-        a.addLast(6);
-        a.addLast(7);
-        a.addLast(8);
-        System.out.println(a.get(3));
-        System.out.println(a.isEmpty());
-        System.out.println();
-        System.out.println(a.removeFirst());
-        System.out.println(a.removeFirst());
-        System.out.println(a.removeLast());
-        a.addFirst(10);
-        a.addFirst(15);
-        a.addFirst(19);
-        a.addFirst(20);
-        a.printDeque();
-
-
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque <Integer> a = new ArrayDeque <Integer> ();
+//        System.out.println(a.isEmpty());
+//        a.addFirst(1);
+//        a.addFirst(2);
+//        a.addFirst(3);
+//        a.addLast(4);
+//        a.addLast(5);
+//        a.addLast(6);
+//        a.addLast(7);
+//        a.addLast(8);
+//        System.out.println(a.get(3));
+//        System.out.println(a.isEmpty());
+//        System.out.println();
+//        System.out.println(a.removeFirst());
+//        System.out.println(a.removeFirst());
+//        System.out.println(a.removeLast());
+//        a.addFirst(10);
+//        a.addFirst(15);
+//        a.addFirst(19);
+//        a.addFirst(20);
+//        a.printDeque();
+//
+//
+//    }
 }
+
