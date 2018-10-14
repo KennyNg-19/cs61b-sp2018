@@ -40,7 +40,7 @@ public class IntListTest {
      * Anything can happen to A.
      */
 
-    @Test
+    @Test(timeout = 1000)
     public void testSquareListRecursive() {
         IntList L = IntList.of(1, 2, 3);
         IntList res = IntList.squareListRecursive(L);
@@ -48,7 +48,7 @@ public class IntListTest {
         assertEquals(IntList.of(1, 4, 9), res);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void testDcatenate() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
@@ -57,7 +57,7 @@ public class IntListTest {
         assertEquals(IntList.of(1, 2, 3, 4, 5, 6), A);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void testCatenate() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
@@ -65,6 +65,25 @@ public class IntListTest {
         assertEquals(exp, IntList.catenate(A, B));
         assertEquals(IntList.of(1, 2, 3), A);
     }
+
+    @Test(timeout = 1000)
+    public void testReverse() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(3, 2, 1);
+        IntList Acopy = IntList.of(1, 2, 3);
+        IntList C = IntList.reverse(A);
+        assertNotEquals(A, Acopy);
+        if (! B.equals(C)) {
+            System.out.println("There is something wrong with method");
+        }
+        IntList A1 = null;
+        IntList C1 = IntList.reverse(A1);
+        if (C1 != A1) {
+            System.out.println("There is something wrong with method");
+        }
+
+    }
+
 
     /** If you're running this from the command line, you'll need
       * to add a main method. See ArithmeticTest.java for an
