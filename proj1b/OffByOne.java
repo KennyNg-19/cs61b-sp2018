@@ -1,19 +1,13 @@
-/**  Project 1B: Applying and Testing Data Structures version 1.0
- *
- *   @author Zhenye Na 05/23/2018
- *
- *   Task 5: OffByOne
- * */
+public class OffByOne implements CharacterComparator{
 
-public class OffByOne implements CharacterComparator {
-
-
+    /** Return true if x is off by one to y and false otherwise. */
     @Override
     public boolean equalChars(char x, char y) {
-        return (Math.abs((int) x - (int) y) == 1);
+        int diff = x - y;
+        if (diff == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-
-
-
 }
