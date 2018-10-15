@@ -1,20 +1,22 @@
-
+/**  Project 1B: Applying and Testing Data Structures version 1.0
+ *
+ *   @author Zhenye Na 05/23/2018
+ *
+ *   Task 5: OffByN
+ * */
 
 public class OffByN implements CharacterComparator {
 
-    private int num;
+    /** Declare variable. */
+    private int N;
 
     public OffByN(int N) {
-        num = N;
+        this.N = N;
     }
+
 
     @Override
     public boolean equalChars(char x, char y) {
-        int diff  = x - y;
-        if (diff == num) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Math.abs((int) x - (int) y) == N);
     }
 }

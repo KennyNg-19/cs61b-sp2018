@@ -1,13 +1,19 @@
-public class OffByOne implements CharacterComparator{
+/**  Project 1B: Applying and Testing Data Structures version 1.0
+ *
+ *   @author Zhenye Na 05/23/2018
+ *
+ *   Task 5: OffByOne
+ * */
 
-    /** Return true if x is off by one to y and false otherwise. */
+public class OffByOne implements CharacterComparator {
+
+
     @Override
     public boolean equalChars(char x, char y) {
-        int diff = x - y;
-        if (diff == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (Math.abs((int) x - (int) y) == 1);
     }
+
+
+
+
 }
