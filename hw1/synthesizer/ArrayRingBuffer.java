@@ -54,7 +54,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return new RealIterator();
     }
 
-    public class RealIterator<Item> implements Iterator<Item> {
+    private class RealIterator<Item> implements Iterator<Item> {
         private int ptr;
         public RealIterator() {
             ptr = first;

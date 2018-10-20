@@ -62,11 +62,11 @@ public class GuitarString {
         return buffer.peek();
     }
 
-    public static void main(String[] args) {
-        GuitarString guiter = new GuitarString(10000);
-        guiter.pluck();
-        for (int i = 0; i < 10; i++) {
-            guiter.tic();
-        }
-    }
+//    public static void main(String[] args) {
+//        GuitarString guiter = new GuitarString(10000);
+//        guiter.pluck();
+//        for (int i = 0; i < 10; i++) {
+//            guiter.tic();
+//        }
+//    }
 }
