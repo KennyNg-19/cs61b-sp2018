@@ -83,7 +83,7 @@ public class LinkedListDeque<T> {
             return removedNode;
         }
     }
-    
+
 
     /* remove the last element in the list */
     public T removeLast() {
