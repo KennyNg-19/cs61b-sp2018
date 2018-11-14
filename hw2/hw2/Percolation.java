@@ -9,11 +9,11 @@ public class Percolation {
     private WeightedQuickUnionUF ufWithoutBottom;
     private boolean[][] openState;
     /** transform (x, y) into a single number */
-    private int xyToNum(int x, int y, int N){
+    private int xyToNum(int x, int y, int N) {
         return x * N + y + 1;
     }
     /** judge if the adjacent site is open and make union if possible*/
-    private void unionNeighbour(int row, int col, int adjacentR, int adjacentC, int dim) {
+    private void unionNeighbour(int row, int col, int adjacentR, int adjacentC) {
         if ((adjacentR < dim && adjacentR >= 0) && (adjacentC < dim && adjacentC >= 0)) {
             if (isOpen(adjacentR, adjacentC)) {
                 int idx = xyToNum(row, col, dim);
@@ -27,14 +27,16 @@ public class Percolation {
     /** constructor of the percolation*/
     public Percolation(int N) {
         if (N <= 0) {
-            throw new java.lang.IllegalArgumentException("The value of N should be greater than zero");
+            throw new java.lang.IllegalArgumentException
+                    ("The value of N should be greater than zero");
         }
         dim = N;
-        uf = new WeightedQuickUnionUF(N * N + 2); // consider two extra node representing top and bottom node.
+        // consider two extra node representing top and bottom node.
+        uf = new WeightedQuickUnionUF(N * N + 2);
         ufWithoutBottom = new WeightedQuickUnionUF(N * N + 2);
         openState = new boolean[N][N];
-        for (int i = 0; i < N; i++){
-            for (int j = 0; j < N; j++){
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 openState[i][j] = false;
             }
         }
@@ -55,10 +57,10 @@ public class Percolation {
             } else if (row == dim - 1) {
                 uf.union(dim * dim + 1, index);
             }
-            unionNeighbour(row, col, row - 1, col, dim);
-            unionNeighbour(row, col, row + 1, col, dim);
-            unionNeighbour(row, col, row, col - 1, dim);
-            unionNeighbour(row, col, row, col + 1, dim);
+            unionNeighbour(row, col, row - 1, col);
+            unionNeighbour(row, col, row + 1, col);
+            unionNeighbour(row, col, row, col - 1);
+            unionNeighbour(row, col, row, col + 1);
             size += 1;
         }
 

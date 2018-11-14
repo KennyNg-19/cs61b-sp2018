@@ -1,7 +1,6 @@
 package hw2;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
-import java.lang.Math;
 public class PercolationStats {
     private int[] result;
     public PercolationStats(int N, int T, PercolationFactory pf) {
@@ -12,10 +11,10 @@ public class PercolationStats {
         for (int i = 0; i < T; i++) {
             Percolation per;
             per = pf.make(N);
-            while (! per.percolates()) {
+            while ( ! per.percolates()) {
                 int row = StdRandom.uniform(N);
                 int col = StdRandom.uniform(N);
-                if (! per.isOpen(row, col)) {
+                if ( ! per.isOpen(row, col)) {
                     per.open(row, col);
                 }
                 if (per.percolates()) {
