@@ -9,7 +9,7 @@ public class PercolationStats {
             throw new java.lang.IllegalArgumentException("N and T should be a positive integer");
         }
         result = new int[T];
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < T; i++) {
             Percolation per;
             per = pf.make(N);
             while (! per.percolates()) {

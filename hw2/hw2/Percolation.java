@@ -27,7 +27,7 @@ public class Percolation {
     /** constructor of the percolation*/
     public Percolation(int N) {
         if (N <= 0) {
-            throw new java.lang.IndexOutOfBoundsException("The value of N should be greater than zero");
+            throw new java.lang.IllegalArgumentException("The value of N should be greater than zero");
         }
         dim = N;
         uf = new WeightedQuickUnionUF(N * N + 2); // consider two extra node representing top and bottom node.
@@ -43,22 +43,25 @@ public class Percolation {
     /** implement open method */
     public void open(int row, int col) {
         if (row > dim || col > dim) {
-            throw new java.lang.IndexOutOfBoundsException("the index is going beyond the boundary");
+            throw new java.lang.IllegalArgumentException("the index is going beyond the boundary");
         }
-        openState[row][col] = true;
-        int index = xyToNum(row, col, dim);
-        if (row == 0) {
-            uf.union(0, index);
-            ufWithoutBottom.union(0, index);
+        if (! isOpen(row, col)) {
+            openState[row][col] = true;
+            int index = xyToNum(row, col, dim);
+            if (row == 0) {
+                uf.union(0, index);
+                ufWithoutBottom.union(0, index);
 //            System.out.println("the site is connected with water");
-        } else if (row == dim - 1) {
-            uf.union(dim * dim + 1, index);
+            } else if (row == dim - 1) {
+                uf.union(dim * dim + 1, index);
+            }
+            unionNeighbour(row, col, row - 1, col, dim);
+            unionNeighbour(row, col, row + 1, col, dim);
+            unionNeighbour(row, col, row, col - 1, dim);
+            unionNeighbour(row, col, row, col + 1, dim);
+            size += 1;
         }
-        unionNeighbour(row, col, row - 1, col, dim);
-        unionNeighbour(row, col, row + 1, col, dim);
-        unionNeighbour(row, col, row, col - 1, dim);
-        unionNeighbour(row, col, row, col + 1, dim);
-        size += 1;
+
     }
 
     /** judge whether the (row, col) is open*/
