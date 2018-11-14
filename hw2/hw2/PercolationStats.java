@@ -48,10 +48,4 @@ public class PercolationStats {
         double devVal = stddev();
         return meanVal + 1.96 * devVal / Math.sqrt(result.length);
     }
-
-    public static void main(String[] strings) {
-        PercolationFactory pf = new PercolationFactory();
-        PercolationStats p = new PercolationStats(100, 100, pf);
-        System.out.println(p.mean());
-    }
 }
