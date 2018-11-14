@@ -46,11 +46,16 @@ public class Percolation {
     public void open(int row, int col) {
         if (row >= dim || col >= dim) {
             throw new java.lang.IndexOutOfBoundsException
-                    ("the index is going beyond the boundary");
+            ("the index is going beyond the boundary");
         }
         if (!isOpen(row, col)) {
             openState[row][col] = true;
             int index = xyToNum(row, col, dim);
+            if (dim == 1) {
+                uf.union(0, index);
+                ufWithoutBottom.union(0, index);
+                uf.union(dim * dim + 1, index);
+            }
             if (row == 0) {
                 uf.union(0, index);
                 ufWithoutBottom.union(0, index);
@@ -91,16 +96,19 @@ public class Percolation {
     }
 
     public static void main(String[] args) {
-        Percolation per = new Percolation(10);
-        per.open(0, 1);
-        per.open(1, 1);
-        System.out.println(per.isFull(1, 1));
-        per.open(0, 2);
-        per.open(0, 3);
-//        System.out.println(per.numberOfOpenSites());
-        System.out.println(per.isFull(0, 2));
-        System.out.println(per.isOpen(0, 1));
-        System.out.println(per.isOpen(0, 2));
+        Percolation per = new Percolation(1);
+        per.open(0, 0);
+        System.out.println(per.isFull(0, 0));
+        System.out.println(per.isOpen(0, 0));
+        System.out.println(per.percolates());
+//        per.open(1, 1);
+//        System.out.println(per.isFull(1, 1));
+//        per.open(0, 2);
+//        per.open(0, 3);
+////        System.out.println(per.numberOfOpenSites());
+//        System.out.println(per.isFull(0, 2));
+//        System.out.println(per.isOpen(0, 1));
+//        System.out.println(per.isOpen(0, 2));
 
 
     }

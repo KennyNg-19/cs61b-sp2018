@@ -2,12 +2,12 @@ package hw2;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 public class PercolationStats {
-    private int[] result;
+    private double[] result;
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
             throw new java.lang.IllegalArgumentException("N and T should be a positive integer");
         }
-        result = new int[T];
+        result = new double[T];
         for (int i = 0; i < T; i++) {
             Percolation per;
             per = pf.make(N);
@@ -21,7 +21,7 @@ public class PercolationStats {
                     break;
                 }
             }
-            result[i] = per.numberOfOpenSites() / N * N;
+            result[i] = (float) per.numberOfOpenSites() / (N * N);
         }
 
     }
@@ -47,5 +47,11 @@ public class PercolationStats {
         double meanVal = mean();
         double devVal = stddev();
         return meanVal + 1.96 * devVal / Math.sqrt(result.length);
+    }
+
+    public static void main(String[] strings) {
+        PercolationFactory pf = new PercolationFactory();
+        PercolationStats p = new PercolationStats(100, 100, pf);
+        System.out.println(p.mean());
     }
 }
