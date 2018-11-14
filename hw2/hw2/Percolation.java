@@ -28,7 +28,7 @@ public class Percolation {
     public Percolation(int N) {
         if (N <= 0) {
             throw new java.lang.IllegalArgumentException
-                    ("The value of N should be greater than zero");
+            ("The value of N should be greater than zero");
         }
         dim = N;
         // consider two extra node representing top and bottom node.
@@ -44,10 +44,11 @@ public class Percolation {
 
     /** implement open method */
     public void open(int row, int col) {
-        if (row > dim || col > dim) {
-            throw new java.lang.IllegalArgumentException("the index is going beyond the boundary");
+        if (row >= dim || col >= dim) {
+            throw new java.lang.IndexOutOfBoundsException
+                    ("the index is going beyond the boundary");
         }
-        if (! isOpen(row, col)) {
+        if (!isOpen(row, col)) {
             openState[row][col] = true;
             int index = xyToNum(row, col, dim);
             if (row == 0) {
@@ -67,7 +68,7 @@ public class Percolation {
     }
 
     /** judge whether the (row, col) is open*/
-    public boolean isOpen(int row, int col){
+    public boolean isOpen(int row, int col) {
         return openState[row][col];
     }
 

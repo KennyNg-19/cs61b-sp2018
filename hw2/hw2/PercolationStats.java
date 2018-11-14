@@ -11,17 +11,17 @@ public class PercolationStats {
         for (int i = 0; i < T; i++) {
             Percolation per;
             per = pf.make(N);
-            while ( ! per.percolates()) {
+            while (!per.percolates()) {
                 int row = StdRandom.uniform(N);
                 int col = StdRandom.uniform(N);
-                if ( ! per.isOpen(row, col)) {
+                if (!per.isOpen(row, col)) {
                     per.open(row, col);
                 }
                 if (per.percolates()) {
                     break;
                 }
             }
-            result[i] = per.numberOfOpenSites();
+            result[i] = per.numberOfOpenSites() / N * N;
         }
 
     }
@@ -32,6 +32,7 @@ public class PercolationStats {
     }
 
     public double stddev() {
+
         return StdStats.stddev(result);
 
     }
