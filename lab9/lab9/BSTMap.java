@@ -149,7 +149,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
                     return root.right;
                 } else {
                     Node temp = root;
-                    root = min(root);
+                    root = min(temp.right);
                     root.right = removeMin(temp.right);
                     root.left = temp.left;
                 }
@@ -206,7 +206,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         bstmap.put("cat", 10);
         bstmap.put("fish", 22);
         bstmap.put("zebra", 90);
-        int reVal = bstmap.remove("cat");
+        int reVal = bstmap.remove("hello");
         System.out.println(reVal);
         System.out.println(bstmap.size());
         for (String k: bstmap) {
