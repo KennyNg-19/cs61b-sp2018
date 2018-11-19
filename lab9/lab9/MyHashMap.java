@@ -1,5 +1,6 @@
 package lab9;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -7,7 +8,7 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author Yuan Liang
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
@@ -22,6 +23,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     }
 
     public MyHashMap() {
+        //haven't initialized yet!! different from c++
         buckets = new ArrayMap[DEFAULT_SIZE];
         this.clear();
     }
@@ -53,19 +55,43 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        int index = hash(key);
+        return buckets[index].get(key);
     }
 
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+
+        if (get(key) != null) {
+            int index = hash(key);
+            buckets[index].put(key, value);
+        } else {
+            size += 1;
+            if (loadFactor() > MAX_LF) {
+                ArrayMap<K, V>[] temp = buckets;
+                int oldSize = size;
+                buckets = new ArrayMap[buckets.length * 2];
+                this.clear();
+                size += oldSize;
+                for (int i = 0; i < temp.length; i++) {
+                    Set<K> SetOfBucket = temp[i].keySet();
+                    for (K k : SetOfBucket) {
+                        V val = temp[i].get(k);
+                        int idx = hash(k);
+                        buckets[idx].put(k, val);
+                    }
+                }
+            }
+            int index = hash(key);
+            buckets[index].put(key, value);
+        }
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
@@ -73,7 +99,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     /* Returns a Set view of the keys contained in this map. */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        Set<K> keySet = new HashSet<>();
+        for (int i = 0; i < buckets.length; i++) {
+            for (K key : buckets[i].keySet()) {
+                keySet.add(key);
+            }
+        }
+        return keySet;
     }
 
     /* Removes the mapping for the specified key from this map if exists.
@@ -81,7 +113,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * UnsupportedOperationException. */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        int idx = hash(key);
+        return buckets[idx].remove(key);
     }
 
     /* Removes the entry for the specified key only if it is currently mapped to
@@ -89,11 +122,27 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * throw an UnsupportedOperationException.*/
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        int idx = hash(key);
+        return buckets[idx].remove(key, value);
     }
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        return keySet().iterator();
+    }
+
+    public static void main(String[] strings) {
+        MyHashMap<String, String> test = new MyHashMap<>();
+        test.put("hellow", "world");
+        test.put("hell", "word");
+        test.put("hell", "java");
+        test.put("hell" + 1, "javascript");
+        System.out.println(test.get("hellow"));
+        System.out.println(test.size());
+        for (String k : test) {
+            System.out.println(k);
+        }
+        System.out.println(test.remove("hell" + 1));
+
     }
 }
