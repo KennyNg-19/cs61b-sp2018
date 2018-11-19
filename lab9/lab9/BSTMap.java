@@ -150,8 +150,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
                 } else {
                     Node temp = root;
                     root = min(root);
-                    root.left = removeMin(temp.right);
-                    root.right = temp.right;
+                    root.right = removeMin(temp.right);
+                    root.left = temp.left;
                 }
 
             }
