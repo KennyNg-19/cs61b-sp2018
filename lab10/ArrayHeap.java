@@ -22,29 +22,25 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
          * the size to be 0 since nothing has been inserted yet. */
         size = 0;
     }
-
     /**
      * Returns the index of the node to the left of the node at i.
      */
     private static int leftIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i * 2;
     }
 
     /**
      * Returns the index of the node to the right of the node at i.
      */
     private static int rightIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i * 2 + 1;
     }
 
     /**
      * Returns the index of the node that is the parent of the node at i.
      */
     private static int parentIndex(int i) {
-        /* TODO: Your code here! */
-        return 0;
+        return i / 2;
     }
 
     /**
@@ -107,8 +103,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
-        return;
+        while (index > 1 && min(index / 2, index) == index) {
+            swap(index / 2, index);
+            index = index / 2;
+        }
     }
 
     /**
@@ -118,8 +116,12 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
-        /** TODO: Your code here. */
-        return;
+        while (index * 2 <= size) {
+            int exchanged = index * 2;
+            if (exchanged < size && min(exchanged, exchanged + 1) == exchanged + 1) exchanged ++;
+            if (min(exchanged, index) == exchanged) swap(exchanged, index);
+            index = exchanged;
+        }
     }
 
     /**
@@ -132,8 +134,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         if (size + 1 == contents.length) {
             resize(contents.length * 2);
         }
+        Node newNode = new Node(item, priority);
+        contents[size + 1] = newNode;
+        size += 1;
+        swim(size);
 
-        /* TODO: Your code here! */
     }
 
     /**
@@ -142,8 +147,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T peek() {
-        /* TODO: Your code here! */
-        return null;
+        return contents[1].item();
     }
 
     /**
@@ -157,8 +161,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
-        /* TODO: Your code here! */
-        return null;
+        Node smallest = contents[1];
+        swap(1, size);
+        contents[size--] = null;
+        sink(1);
+        return smallest.item();
     }
 
     /**
@@ -180,8 +187,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        /* TODO: Your code here! */
-        return;
+        for (int ix = 1; ix <= size; ix++) {
+            if (item.equals(contents[ix].item())) {
+                contents[ix] = new Node(item, priority);
+            }
+        }
     }
 
     /**
