@@ -1,5 +1,7 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.Complex;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +20,15 @@ public class HashTableVisualizer {
         int N = 100;
         int M = 10;
 
+//        double scale = 0.1;
+//        int N = 2000;
+//        int M = 100;
+
         HashTableDrawingUtility.setScale(scale);
         List<Oomage> oomies = new ArrayList<>();
         for (int i = 0; i < N; i += 1) {
-           oomies.add(SimpleOomage.randomSimpleOomage());
+//           oomies.add(SimpleOomage.randomSimpleOomage());
+           oomies.add(ComplexOomage.randomComplexOomage());
         }
         visualize(oomies, M, scale);
     }
@@ -31,6 +38,8 @@ public class HashTableVisualizer {
         int[] numInBucket = new int[M];
         for (Oomage s : oomages) {
             int bucketNumber = (s.hashCode() & 0x7FFFFFFF) % M;
+            int a = s.hashCode();
+            System.out.println(s.hashCode());
             double x = HashTableDrawingUtility.xCoord(numInBucket[bucketNumber]);
             numInBucket[bucketNumber] += 1;
             double y = HashTableDrawingUtility.yCoord(bucketNumber, M);
