@@ -107,7 +107,9 @@ public class Board implements WorldState {
         if (y == null || this.getClass() != y.getClass()) {
             return false;
         }
+
         Board board1 = (Board) y;
+//        if (size() !=  board1.size()) {return false;}
         if (board != null && board1.board != null) {
             for (int i = 0; i < size(); i++) {
                 for (int j = 0; j < size(); j++) {
