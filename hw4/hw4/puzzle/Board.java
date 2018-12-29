@@ -108,10 +108,16 @@ public class Board implements WorldState {
             return false;
         }
         Board board1 = (Board) y;
-        if (board != null ? !board.equals(board1.board) : board1.board != null) {
-            return false;
-        }
-        return goal != null ? goal.equals(board1.goal) : board1.goal == null;
+        if (board != null && board1.board != null) {
+            for (int i = 0; i < size(); i++) {
+                for (int j = 0; j < size(); j++) {
+                    if (board[i][j] != board1.board[i][j]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } else {return false;}
     }
 
     public String toString() {
