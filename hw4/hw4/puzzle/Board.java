@@ -73,7 +73,7 @@ public class Board implements WorldState {
         int d = 0;
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
-                if (board[i][j] != goal[i][j]) {
+                if (board[i][j] != 0 && board[i][j] != goal[i][j]) {
                     d += 1;
                 }
             }
@@ -85,10 +85,11 @@ public class Board implements WorldState {
         int d = 0;
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j ++) {
-                int expectedR = (board[i][j] - 1) / size();
-                int expectedC = (board[i][j] - 1) % size();
-                d += (Math.abs(expectedR - i) + Math.abs(expectedC - j));
-
+                if (board[i][j] != 0) {
+                    int expectedR = (board[i][j] - 1) / size();
+                    int expectedC = (board[i][j] - 1) % size();
+                    d += (Math.abs(expectedR - i) + Math.abs(expectedC - j));
+                }
             }
         }
         return d;
@@ -125,5 +126,12 @@ public class Board implements WorldState {
         }
         s.append("\n");
         return s.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = board != null ? board.hashCode() : 0;
+        result = result * 31 + goal.hashCode();
+        return result;
     }
 }
