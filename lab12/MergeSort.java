@@ -68,20 +68,24 @@ public class MergeSort {
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        if (items.size() == 0) {
-            return items;
-        } else if (items.size() == 1) {
+        if (items.size() <= 1) {
             return items;
         } else if (items.size() == 2) {
             Queue<Queue<Item>> singleQ = makeSingleItemQueues(items);
             return mergeSortedQueues(singleQ.dequeue(), singleQ.dequeue());
         } else {
-            Queue<Item> halfQ = new Queue<>();
-            for (int i = 0; i < items.size() / 2; i++) {
-                halfQ.enqueue(items.dequeue());
+            Queue<Item> leftQ = new Queue<>();
+            Queue<Item> rightQ = new Queue<>();
+            int i = 0;
+            for (Item item : items) {
+                if (i < items.size() / 2) {
+                    leftQ.enqueue(item);
+                } else { rightQ.enqueue(item); }
+                i++;
             }
-            Queue<Item> leftQ = mergeSort(halfQ);
-            Queue<Item> rightQ = mergeSort(items);
+
+            leftQ = mergeSort(leftQ);
+            rightQ = mergeSort(rightQ);
             return mergeSortedQueues(leftQ, rightQ);
         }
     }
