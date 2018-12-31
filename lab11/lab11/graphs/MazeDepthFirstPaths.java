@@ -16,7 +16,7 @@ public class MazeDepthFirstPaths extends MazeExplorer {
 
 
     public MazeDepthFirstPaths(Maze m, int sourceX, int sourceY, int targetX, int targetY) {
-        super(m);
+        super(m); // inherit attributes from superclass but not the constructor.
         maze = m;
         s = maze.xyTo1D(sourceX, sourceY);
         t = maze.xyTo1D(targetX, targetY);

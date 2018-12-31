@@ -9,7 +9,7 @@ public abstract class MazeExplorer extends Observable {
     protected int[] distTo;
     protected int[] edgeTo;
     protected boolean[] marked;
-    protected Maze maze;
+    protected Maze maze ;
 
 
     /**

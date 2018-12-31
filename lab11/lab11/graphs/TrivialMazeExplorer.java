@@ -16,6 +16,7 @@ public class TrivialMazeExplorer extends MazeExplorer {
             marked[i] = true;
             announce();
         }
+
     }
 }
 
