@@ -34,8 +34,13 @@ public class MergeSort {
     /** Returns a queue of queues that each contain one item from items. */
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
-        // Your code here!
-        return null;
+        Queue<Queue<Item>> targetQueue = new Queue<>();
+        for (Item i : items) {
+            Queue<Item> q = new Queue<>();
+            q.enqueue(i);
+            targetQueue.enqueue(q);
+        }
+        return targetQueue;
     }
 
     /**
@@ -53,14 +58,38 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+        Queue<Item> target = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            target.enqueue(getMin(q1, q2));
+        }
+        return target;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        // Your code here!
-        return items;
+        if (items.size() == 1) {
+            return items;
+        } else if (items.size() == 2) {
+            Queue<Queue<Item>> singleQ = makeSingleItemQueues(items);
+            return mergeSortedQueues(singleQ.dequeue(), singleQ.dequeue());
+        } else {
+            Queue<Item> halfQ = new Queue<>();
+            for (int i = 0; i < items.size() / 2; i++) {
+                halfQ.enqueue(items.dequeue());
+            }
+            Queue<Item> leftQ = mergeSort(halfQ);
+            Queue<Item> rightQ = mergeSort(items);
+            return mergeSortedQueues(leftQ, rightQ);
+        }
+    }
+    public static void main(String[] args) {
+        Queue<Integer> test = new Queue<>();
+        for (int i = 0; i < 20; i ++) {
+            test.enqueue((int)(Math.random() * 50 + 1));
+        }
+        System.out.println(test.toString());
+        Queue<Integer> merged = mergeSort(test);
+        System.out.println(merged.toString());
     }
 }
