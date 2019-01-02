@@ -38,6 +38,8 @@ public class MapServer {
             ROOT_LRLAT = 37.82280243352756, ROOT_LRLON = -122.2119140625;
     /** Each tile is 256x256 pixels. */
     public static final int TILE_SIZE = 256;
+    /** The maximum depth of tile is 7. */
+    public static final int MAX_DEPTH = 7;
     /** HTTP failed response. */
     private static final int HALT_RESPONSE = 403;
     /** Route stroke information: typically roads are not more than 5px wide. */
