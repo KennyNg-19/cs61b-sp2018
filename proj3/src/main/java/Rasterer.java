@@ -8,8 +8,6 @@ import java.util.Map;
  * not draw the output correctly.
  */
 public class Rasterer {
-    /* the depth of the file*/
-    private int depth;
     /* the longitude length per file*/
     private double lonPerFile;
     /* the latitude length per file*/
@@ -20,10 +18,10 @@ public class Rasterer {
     private int colNum;
 
     public Rasterer() {
-        depth = 0;
         lonPerFile = 0.0;
         latPerFile = 0.0;
-
+        rowNum = 0;
+        colNum = 0;
     }
 
     /**
@@ -62,7 +60,8 @@ public class Rasterer {
         double w = params.get("w");
         double h = params.get("h");
         Map<String, Object> results = new HashMap<>();
-        if (lrlon <= MapServer.ROOT_ULLON || ullon >= MapServer.ROOT_LRLON || lrlat >= MapServer.ROOT_ULLAT || ullat <= MapServer.ROOT_LRLAT) {
+        if (lrlon <= MapServer.ROOT_ULLON || ullon >= MapServer.ROOT_LRLON ||
+                lrlat >= MapServer.ROOT_ULLAT || ullat <= MapServer.ROOT_LRLAT) {
             setArbitrary(results);
         }
         if (ullon >= lrlon || ullat <= lrlat) {
