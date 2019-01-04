@@ -23,16 +23,17 @@ public class RadixSort {
             longest = str.length() >= longest ? str.length() : longest;
         }
         // build padded string array;
-        String[] padded = asciis.clone();
+//        String[] padded = asciis.clone();
         String[] sorted = asciis.clone();
-        for (int i = 0; i < padded.length; i++) {
-            while (padded[i].length() < longest) {
-                padded[i] = padded[i] + '_';
-            }
-        }
+//        for (int i = 0; i < padded.length; i++) {
+//            while (padded[i].length() < longest) {
+//                padded[i] = padded[i] + '_';
+//            }
+//        }
         // sorted array using radix method
         for (int i = longest-1; i >= 0; i--) {
-            sortHelperLSD(sorted, padded, i);
+//            sortHelperLSD(sorted, padded, i);
+            sortHelperLSD(sorted, i);
         }
 
         return sorted;
@@ -44,11 +45,39 @@ public class RadixSort {
      * @param asciis Input array of Strings
      * @param index The position to sort the Strings on.
      */
-    private static void sortHelperLSD(String[] asciis, String[] padded, int index) {
+//    private static void sortHelperLSD(String[] asciis, String[] padded, int index) {
+//        // implementing the counting sort method for subroutine
+//        int[] counts = new int[RADIX_NUM];
+//        for (String str : padded) {
+//            if (str.charAt(index) == '_') {
+//                counts[0]++;
+//            } else {
+//                int pos = (int) str.charAt(index);
+//                counts[pos]++;
+//            }
+//        }
+//        int[] start = new int[RADIX_NUM];
+//        int pos = 0;
+//        for (int i = 0; i < counts.length; i++) {
+//            start[i] = pos;
+//            pos += counts[i];
+//        }
+//        String[] copyAsciis = asciis.clone();
+//        String[] copyPadded = padded.clone();
+//        for(int i = 0; i < copyAsciis.length; i++) {
+//            int item = copyPadded[i].charAt(index) == '_' ? 0 : (int) copyPadded[i].charAt(index);
+//            int place = start[item];
+//            asciis[place] = copyAsciis[i];
+//            padded[place] = copyPadded[i];
+//            start[item]++;
+//        }
+//        return;
+//    }
+    private static void sortHelperLSD(String[] asciis, int index) {
         // implementing the counting sort method for subroutine
         int[] counts = new int[RADIX_NUM];
-        for (String str : padded) {
-            if (str.charAt(index) == '_') {
+        for (String str : asciis) {
+            if (str.length() < index + 1) {
                 counts[0]++;
             } else {
                 int pos = (int) str.charAt(index);
@@ -62,12 +91,10 @@ public class RadixSort {
             pos += counts[i];
         }
         String[] copyAsciis = asciis.clone();
-        String[] copyPadded = padded.clone();
         for(int i = 0; i < copyAsciis.length; i++) {
-            int item = copyPadded[i].charAt(index) == '_' ? 0 : (int) copyPadded[i].charAt(index);
+            int item = copyAsciis[i].length() < index + 1 ? 0 : (int) copyAsciis[i].charAt(index);
             int place = start[item];
             asciis[place] = copyAsciis[i];
-            padded[place] = copyPadded[i];
             start[item]++;
         }
         return;
@@ -101,7 +128,5 @@ public class RadixSort {
 //        for (String sort : sorted) {
 //            System.out.println(sort);
 //        }
-//        char a = '_';
-//        System.out.println((int) a);
 //    }
 }
