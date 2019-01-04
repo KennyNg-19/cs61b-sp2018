@@ -45,6 +45,7 @@ public class SeamCarverVisualizer {
         }
 
         show(sc.picture());
+        sc.picture().save("output.png");
     }
 
     public void visualizeVerticalCarve(SeamCarver sc, int N) {
