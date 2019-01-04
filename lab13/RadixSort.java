@@ -27,7 +27,7 @@ public class RadixSort {
         String[] sorted = asciis.clone();
         for (int i = 0; i < padded.length; i++) {
             while (padded[i].length() < longest) {
-                padded[i] = padded[i] + ' ';
+                padded[i] = padded[i] + '_';
             }
         }
         // sorted array using radix method
@@ -48,7 +48,7 @@ public class RadixSort {
         // implementing the counting sort method for subroutine
         int[] counts = new int[RADIX_NUM];
         for (String str : padded) {
-            if (str.charAt(index) == ' ') {
+            if (str.charAt(index) == '_') {
                 counts[0]++;
             } else {
                 int pos = (int) str.charAt(index);
@@ -64,7 +64,7 @@ public class RadixSort {
         String[] copyAsciis = asciis.clone();
         String[] copyPadded = padded.clone();
         for(int i = 0; i < copyAsciis.length; i++) {
-            int item = copyPadded[i].charAt(index) == ' ' ? 0 : (int) copyPadded[i].charAt(index);
+            int item = copyPadded[i].charAt(index) == '_' ? 0 : (int) copyPadded[i].charAt(index);
             int place = start[item];
             asciis[place] = copyAsciis[i];
             padded[place] = copyPadded[i];
@@ -101,5 +101,7 @@ public class RadixSort {
 //        for (String sort : sorted) {
 //            System.out.println(sort);
 //        }
+//        char a = '_';
+//        System.out.println((int) a);
 //    }
 }
