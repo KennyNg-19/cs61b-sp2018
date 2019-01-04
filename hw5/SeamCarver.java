@@ -16,7 +16,7 @@ public class SeamCarver {
 
     }
     public Picture picture() {
-        return p;
+        return new Picture(p);
     }
 
     public int width() {
@@ -28,6 +28,11 @@ public class SeamCarver {
     }
 
     public double energy(int x, int y) {
+        // check valid input
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            throw new java.lang.IndexOutOfBoundsException
+                    ("the index is out of bounds");
+        }
         Color c = p.get(x , y);
         Color lc;
         Color rc;
@@ -156,6 +161,9 @@ public class SeamCarver {
     }
 
     public void removeHorizontalSeam(int[] seam) {
+        if (seam.length != width) {
+            throw new java.lang.IllegalArgumentException();
+        }
         p = SeamRemover.removeHorizontalSeam(p, seam);
         height -= 1;
         energy = new double[height][width];
@@ -163,6 +171,9 @@ public class SeamCarver {
     }
 
     public void removeVerticalSeam(int[] seam) {
+        if (seam.length != height) {
+            throw new java.lang.IllegalArgumentException();
+        }
         p = SeamRemover.removeVerticalSeam(p, seam);
         width -= 1;
         energy = new double[height][width];
