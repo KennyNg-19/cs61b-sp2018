@@ -103,6 +103,6 @@ public class CountingSort {
             starts[i + Math.abs(min)]++;
         }
 
-        return sorted2;
+        return sorted;
     }
 }

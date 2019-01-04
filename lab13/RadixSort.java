@@ -115,7 +115,7 @@ public class RadixSort {
         return;
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        String b = "cat";
 //        String c = "apple";
 //        String a = "fish";
@@ -123,10 +123,12 @@ public class RadixSort {
 //        String e = "People";
 //        String f = "shuttle";
 //        String[] ascii2 = new String[] {a, b, c, d, e, f};
-////        String[] ascii2 = new String[] {b, c};
-//        String[] sorted = RadixSort.sort(ascii2);
-//        for (String sort : sorted) {
-//            System.out.println(sort);
-//        }
-//    }
+        String b = "a_'V\u0014µUj,ãôdµ";
+        String c = "aNJN\u0010ÒçVþ";
+        String[] ascii2 = new String[] {b, c};
+        String[] sorted = RadixSort.sort(ascii2);
+        for (String sort : sorted) {
+            System.out.println(sort);
+        }
+    }
 }
