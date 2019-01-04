@@ -11,7 +11,7 @@ public class SeamCarver {
     public SeamCarver(Picture picture) {
         width = picture.width();
         height = picture.height();
-        p = picture;
+        p = new Picture(picture);
         energy = new double[height][width];
 
     }
@@ -156,12 +156,17 @@ public class SeamCarver {
     }
 
     public void removeHorizontalSeam(int[] seam) {
-        SeamRemover.removeHorizontalSeam(p, seam);
+        p = SeamRemover.removeHorizontalSeam(p, seam);
+        height -= 1;
+        energy = new double[height][width];
         return;
     }
 
     public void removeVerticalSeam(int[] seam) {
-        SeamRemover.removeVerticalSeam(p, seam);
+        p = SeamRemover.removeVerticalSeam(p, seam);
+        width -= 1;
+        energy = new double[height][width];
+
         return;
     }
 }
