@@ -77,9 +77,12 @@ public class BinaryTrie implements Serializable {
                     targeBit += '1';
                     copyTrie = copyTrie.right;
                 }
+                if (copyTrie.isLeaf()) {
+                    targeC = copyTrie.c;
+                    break;
+                }
                 pos++;
             } else {
-                targeC = copyTrie.c;
                 break;
             }
         }
@@ -119,10 +122,10 @@ public class BinaryTrie implements Serializable {
         corpus.put('d', 5);
         corpus.put('e', 6);
         BinaryTrie b = new BinaryTrie(corpus);
-        Match target = b.longestPrefixMatch(new BitSequence("0011010001"));
+        Match target = b.longestPrefixMatch(new BitSequence("000"));
         System.out.println(target.getSequence().toString());
         System.out.println(target.getSymbol());
-        Map<Character, BitSequence> table = b.buildLookupTable();
-        System.out.println(table.toString());
+//        Map<Character, BitSequence> table = b.buildLookupTable();
+//        System.out.println(table.toString());
     }
 }
