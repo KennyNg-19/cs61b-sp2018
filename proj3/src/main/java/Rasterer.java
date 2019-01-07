@@ -31,7 +31,7 @@ public class Rasterer {
      *     The grid of images must obey the following properties, where image in the
      *     grid is referred to as a "tile".
      *     <ul>
-     *         <li>The tiles collected must cover the most longitudinal distance per pixel
+     *         <lklki>The tiles collected must cover the most longitudinal distance per pixel
      *         (LonDPP) possible, while still covering less than or equal to the amount of
      *         longitudinal distance per pixel in the query box for the user viewport size. </li>
      *         <li>Contains all tiles that intersect the query bounding box that fulfill the
@@ -191,7 +191,6 @@ public class Rasterer {
         params.put("h", 566.0);
         Rasterer r = new Rasterer();
         Map<String, Object> results = r.getMapRaster(params);
+        System.out.println(results.toString());
     }
-
-
 }
