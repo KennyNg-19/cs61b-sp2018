@@ -11,7 +11,7 @@ public class BinaryTrie implements Serializable {
     private Node binaryTrie;
     private static final int R = 256;
 
-    private class Node implements Comparable<Node>, Serializable{
+    private class Node implements Comparable<Node>, Serializable {
         private char c;
         private int freq;
         private Node left;
@@ -51,8 +51,7 @@ public class BinaryTrie implements Serializable {
         if (pq.size() == 1) {
             Node root = pq.delMin();
             binaryTrie = new Node(root.c, root.freq, null, null);
-        }
-        else {
+        } else {
             while (pq.size() > 1) {
                 Node left = pq.delMin();
                 Node right = pq.delMin();
@@ -70,7 +69,7 @@ public class BinaryTrie implements Serializable {
         int pos = 0;
         Node copyTrie = binaryTrie;
         while (pos < querySequence.length()) {
-            if (! copyTrie.isLeaf()) {
+            if (!copyTrie.isLeaf()) {
                 if (querySequence.bitAt(pos) == 0) {
                     targeBit += '0';
                     copyTrie = copyTrie.left;
@@ -100,14 +99,14 @@ public class BinaryTrie implements Serializable {
 
         for (int i = 0; i < R; i++) {
             if (bitSeq[i] != null) {
-                char c = (char)i;
+                char c = (char) i;
                 table.put(c,  new BitSequence(bitSeq[i]));
             }
         }
         return table;
     }
     private void buildTableHelper(String[] bitSeq, String str, Node root) {
-        if (! root.isLeaf()) {
+        if (!root.isLeaf()) {
             buildTableHelper(bitSeq, str + "0", root.left);
             buildTableHelper(bitSeq, str + "1", root.right);
         } else {

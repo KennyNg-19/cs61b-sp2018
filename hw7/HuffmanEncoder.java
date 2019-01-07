@@ -14,7 +14,7 @@ public class HuffmanEncoder {
         }
         for (int i = 0; i < R; i++) {
             if (nums[i] != 0) {
-                map.put((char)i, nums[i]);
+                map.put((char) i, nums[i]);
             }
         }
         return map;
@@ -25,9 +25,6 @@ public class HuffmanEncoder {
         String output = args[0] + ".huf";
         ObjectWriter writer = new ObjectWriter(output);
 
-//        System.out.println(output);
-//        ObjectReader reader = new ObjectReader(input);
-//        Object intent = reader.readObject();
         // get frequency table
         char[] content = FileUtils.readFile(input);
         int numOfSymbol = content.length;
@@ -47,7 +44,7 @@ public class HuffmanEncoder {
             bSL.add(bs);
         }
         // Get a big bitSequence
-        BitSequence HugeSeq = BitSequence.assemble(bSL);
-        writer.writeObject(HugeSeq);
+        BitSequence hugeSeq = BitSequence.assemble(bSL);
+        writer.writeObject(hugeSeq);
     }
 }
