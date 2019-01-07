@@ -10,35 +10,8 @@ public class BinaryTrie implements Serializable {
 
     private Node binaryTrie;
     private static final int R = 256;
-    public BinaryTrie(Map<Character, Integer> frequencyTable) {
-        if (frequencyTable.size() == 0) {
-            throw new java.lang.IllegalArgumentException();
-        }
-        Set<Character> chSet = frequencyTable.keySet();
-        MinPQ<Node> pq = new MinPQ<>();
-        for (Character ch : chSet) {
-            int f = frequencyTable.get(ch);
-            pq.insert(new Node(ch, f, null, null));
-        }
 
-
-        // consider if there is only on character in MinPQ, what is the best way to think??
-        if (pq.size() == 1) {
-            Node root = pq.delMin();
-            binaryTrie = new Node(root.c, root.freq, null, null);
-        }
-        else {
-            while (pq.size() > 1) {
-                Node left = pq.delMin();
-                Node right = pq.delMin();
-                Node parent = new Node('\0', left.freq + right.freq, left, right);
-                pq.insert(parent);
-            }
-        }
-        binaryTrie = pq.delMin();
-    }
-
-    private class Node implements Comparable<Node> {
+    private class Node implements Comparable<Node>, Serializable{
         private char c;
         private int freq;
         private Node left;
@@ -62,6 +35,34 @@ public class BinaryTrie implements Serializable {
             return this.freq - o.freq;
         }
     }
+
+    public BinaryTrie(Map<Character, Integer> frequencyTable) {
+        if (frequencyTable.size() == 0) {
+            throw new java.lang.IllegalArgumentException();
+        }
+        Set<Character> chSet = frequencyTable.keySet();
+        MinPQ<Node> pq = new MinPQ<>();
+        for (Character ch : chSet) {
+            int f = frequencyTable.get(ch);
+            pq.insert(new Node(ch, f, null, null));
+        }
+
+        // consider if there is only on character in MinPQ, what is the best way to think??
+        if (pq.size() == 1) {
+            Node root = pq.delMin();
+            binaryTrie = new Node(root.c, root.freq, null, null);
+        }
+        else {
+            while (pq.size() > 1) {
+                Node left = pq.delMin();
+                Node right = pq.delMin();
+                Node parent = new Node('\0', left.freq + right.freq, left, right);
+                pq.insert(parent);
+            }
+        }
+        binaryTrie = pq.delMin();
+    }
+
 
     public Match longestPrefixMatch(BitSequence querySequence) {
         String targeBit = "";
@@ -125,7 +126,9 @@ public class BinaryTrie implements Serializable {
         Match target = b.longestPrefixMatch(new BitSequence("000"));
         System.out.println(target.getSequence().toString());
         System.out.println(target.getSymbol());
-//        Map<Character, BitSequence> table = b.buildLookupTable();
-//        System.out.println(table.toString());
+        Map<Character, BitSequence> table = b.buildLookupTable();
+        System.out.println(table.toString());
+
+        char[] c = new char[2];
     }
 }
