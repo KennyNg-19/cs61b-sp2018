@@ -90,21 +90,22 @@ public class Rasterer {
         results.put("depth", depth);
         results.put("query_success", true);
         results.put("render_grid", fileNames);
-//        System.out.println(results);
-//        for (int i = 0; i < rowNum; i++) {
-//            for (int j = 0; j < colNum; j++) {
-//                System.out.println(fileNames[i][j]);
-//            }
-//        }
+        System.out.println(results);
+        for (int i = 0; i < rowNum; i++) {
+            for (int j = 0; j < colNum; j++) {
+                System.out.println(fileNames[i][j]);
+            }
+        }
         return results;
     }
 
     private int queryDepth(double ullon, double lrlon, double w) {
         double targetLonDPP = (lrlon - ullon) / w;
         double originlonDPP = (MapServer.ROOT_LRLON - MapServer.ROOT_ULLON) / MapServer.TILE_SIZE;
-        int depth = (int) Math.ceil(originlonDPP / (2 * targetLonDPP));
-        if (depth > MapServer.MAX_DEPTH) {
-            return MapServer.MAX_DEPTH;
+        int depth = 0;
+        while (originlonDPP > targetLonDPP) {
+            depth += 1;
+            originlonDPP = originlonDPP / 2.0;
         }
         return depth;
     }
@@ -183,12 +184,12 @@ public class Rasterer {
 //        params.put("w", 892.0);
 //        params.put("h", 875.0);
 
-        params.put("ullon", -122.30410170759153);
-        params.put("ullat", 37.870213571328854);
-        params.put("lrlon", -122.2104604264636);
-        params.put("lrlat", 37.8318576119893);
-        params.put("w", 1091.0);
-        params.put("h", 566.0);
+        params.put("ullon", -122.23731726515);
+        params.put("ullat", 37.87110744836637);
+        params.put("lrlon", -122.22373588382914);
+        params.put("lrlat", 37.85889333891679);
+        params.put("w", 494.06958111221564);
+        params.put("h", 861.0069458304683);
         Rasterer r = new Rasterer();
         Map<String, Object> results = r.getMapRaster(params);
         System.out.println(results.toString());
