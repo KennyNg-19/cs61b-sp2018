@@ -90,12 +90,12 @@ public class Rasterer {
         results.put("depth", depth);
         results.put("query_success", true);
         results.put("render_grid", fileNames);
-        System.out.println(results);
-        for (int i = 0; i < rowNum; i++) {
-            for (int j = 0; j < colNum; j++) {
-                System.out.println(fileNames[i][j]);
-            }
-        }
+//        System.out.println(results);
+//        for (int i = 0; i < rowNum; i++) {
+//            for (int j = 0; j < colNum; j++) {
+//                System.out.println(fileNames[i][j]);
+//            }
+//        }
         return results;
     }
 
@@ -175,23 +175,23 @@ public class Rasterer {
         results.put("query_success", false);
         results.put("render_grid", Math.random());
     }
-    public static void main(String[] args) {
-        Map<String, Double> params = new HashMap<>();
+//    public static void main(String[] args) {
+//        Map<String, Double> params = new HashMap<>();
 //        params.put("ullon", -122.24163047377972);
 //        params.put("ullat", 37.87655856892288);
 //        params.put("lrlon", -122.24053369025242);
 //        params.put("lrlat", 37.87548268822065);
 //        params.put("w", 892.0);
 //        params.put("h", 875.0);
-
-        params.put("ullon", -122.23731726515);
-        params.put("ullat", 37.87110744836637);
-        params.put("lrlon", -122.22373588382914);
-        params.put("lrlat", 37.85889333891679);
-        params.put("w", 494.06958111221564);
-        params.put("h", 861.0069458304683);
-        Rasterer r = new Rasterer();
-        Map<String, Object> results = r.getMapRaster(params);
-        System.out.println(results.toString());
-    }
+//
+//        params.put("ullon", -122.23731726515);
+//        params.put("ullat", 37.87110744836637);
+//        params.put("lrlon", -122.22373588382914);
+//        params.put("lrlat", 37.85889333891679);
+//        params.put("w", 494.06958111221564);
+//        params.put("h", 861.0069458304683);
+//        Rasterer r = new Rasterer();
+//        Map<String, Object> results = r.getMapRaster(params);
+//        System.out.println(results.toString());
+//    }
 }
